@@ -1,0 +1,9 @@
+#start
+docker compose up --watch -d
+
+#stop
+docker compose down
+
+#push to docker hub
+docker login -u USER -p PASSWORD
+docker compose push

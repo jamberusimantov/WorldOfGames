@@ -1,0 +1,10 @@
+#DOCKER FILES
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+#SECRETS
+freecurrencyapi.txt
+
+#ETC
+commands

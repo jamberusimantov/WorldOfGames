@@ -1,0 +1,22 @@
+services:
+  web:
+    build: . 
+    ports:
+      - "5000:5000"
+    image: "sjamberu/world_of_games:1.0"
+    environment:
+      FLASK_APP: World Of Games
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_ENV: "development"
+    secrets:
+      - APIKEY
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: "/World Of Games"
+        - action: rebuild
+          path: /World Of Games
+secrets:
+  APIKEY:
+    file: freecurrencyapi.txt

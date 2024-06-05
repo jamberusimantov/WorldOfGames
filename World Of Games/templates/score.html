@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Score
+{% endblock %}
+
+{% block content %}
+{% if error %}
+<h1 id="score">Error: <br /><span class="failed"> {{ error }}</span></h1>
+{% else %}
+<h1 id="score">Your Score is:<span class="success"> {{ score }}</span></h1>
+{% endif %}
+{% endblock %}
