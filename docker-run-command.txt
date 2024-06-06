@@ -1,0 +1,13 @@
+#start
+docker-compose up -d
+
+#stop
+docker-compose down
+
+#push to docker hub
+docker login -u <USER> -p <PASSWORD>
+docker-compose push
+
+#ASSUMPTIONS
+1. freecurrencyapi.txt at root with apikey
+2. dockerhub user/ password

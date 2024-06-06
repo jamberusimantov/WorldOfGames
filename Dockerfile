@@ -1,9 +1,11 @@
-FROM ubuntu:22.04
-RUN apt-get update && apt-get install -y python3 python3-pip curl
-COPY .. /WorldOfGames
+FROM python:3.12-alpine3.20
 WORKDIR /WorldOfGames
+# Install dependencies
+RUN apk add --no-cache gcc musl-dev linux-headers
+RUN pip install --upgrade pip
+COPY requirements.txt .
 RUN pip install -r requirements.txt
+# Copy source files into application directory
+COPY . .
 RUN mv Scores.txt /Scores.txt
-ENV FLASK_APP=app
-EXPOSE 5000
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000", "--debug"]
+CMD ["flask", "run"]

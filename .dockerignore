@@ -1,10 +1,12 @@
 #DOCKER FILES
 .dockerignore
-Dockerfile
 docker-compose.yml
+docker-run-command.txt
+Dockerfile
 
 #SECRETS
-freecurrencyapi.txt
+*api.txt
 
-#ETC
-commands
+#git
+.git
+.gitignore

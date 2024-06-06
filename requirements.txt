@@ -1,5 +1,4 @@
-selenium~=4.21.0
-Flask~=3.0.3
-requests~=2.32.2
-interval~=1.0.0
-urllib3~=2.2.1
+selenium
+Flask
+interval
+urllib3
