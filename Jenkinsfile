@@ -5,11 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                ls -ltra
             }
-            steps {
-                ls -ltr
-            }
-        }
         stage('Test') {
             steps {
                 echo 'Testing..'
