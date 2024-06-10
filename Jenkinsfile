@@ -3,14 +3,6 @@ pipeline {
     
     stages {
         
-        stage('Checkout') {
-            steps {
-                echo 'Checkouting...'
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'f410439b-b054-49bd-9eb2-5d3450760605', url: 'https://github.com/jamberusimantov/WorldOfGames.git']])
-                ls '-ltra'
-            }
-        }
-        
         stage('Build') {
             steps {
                 echo 'Building...'
