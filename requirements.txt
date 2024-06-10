@@ -1,4 +1,4 @@
-selenium
+beautifulsoup4
 Flask
 interval
 urllib3

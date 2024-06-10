@@ -2,21 +2,28 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8777:8777"
     image: "sjamberu/world_of_games:1.0"
     environment:
-      FLASK_APP: World Of Games
-      FLASK_ENV: "development"
-      FLASK_HOST: 0.0.0.0
+      FLASK_APP: WorldOfGames
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 8777
     secrets:
       - APIKEY
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: "../World Of Games"
-        - action: rebuild
-          path: ../World Of Games
+  jenkins:
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+     - 8080:8080
+     - 50000:50000
+    container_name: jenkins
+    volumes:
+    # on win \\wsl$\docker-desktop-data\data\docker\volumes\var\jenkins_home
+     - ~/var/jenkins_home:/var/jenkins_home
+     - //var/run/docker.sock:/var/run/docker.sock
+volumes:
+  jenkins:
 secrets:
   APIKEY:
     file: freecurrencyapi.txt

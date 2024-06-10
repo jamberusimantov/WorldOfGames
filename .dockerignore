@@ -8,5 +8,7 @@ Dockerfile
 *api.txt
 
 #git
-.git
-.gitignore
+.git*
+
+#Jenkins
+Jenkinsfile
