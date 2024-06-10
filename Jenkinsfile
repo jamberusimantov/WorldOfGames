@@ -12,13 +12,10 @@ pipeline {
         }
         
         stage('Build') {
-            agent  {     
-                dockerfile {
-                    args '--tag sjamberu/world_of_games:1.0 --force-rm --quiet'
-                }             
-            }
             steps {
                 echo 'Building...'
+                sh 'docker build -t sjamberu/world_of_games:1.0 -p 8777:8777 --rm --no-cache --quiet .'
+                sh 'docker ps -a'
             }
         }
         
