@@ -5,6 +5,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkouting...'
+                git url: 'https://github.com/jamberusimantov/WorldOfGames'
+                sh 'make all'
                 sh 'ls -ltra'
             }
         }
