@@ -5,14 +5,16 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkouting...'
-                git url: 'https://github.com/jamberusimantov/WorldOfGames'
-                sh 'make all'
-                sh 'ls -ltra'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'f410439b-b054-49bd-9eb2-5d3450760605', url: 'https://github.com/jamberusimantov/WorldOfGames.git']])
             }
         }
         stage('Build') {
             steps {
                 echo 'Building...'
+                def container = docker.build '"sjamberu/world_of_games:1.1"'
+                    container.inside {
+                        sh 'make test'
+                    } 
             }
         }
         stage('Run') {
