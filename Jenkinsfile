@@ -1,11 +1,21 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
 
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checkouting...'
+                sh 'ls -ltra'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'echo Building..'
-                sh 'ls -ltra'
+                echo 'Building...'
+            }
+        }
+        stage('Run') {
+            steps {
+                echo 'Running...'
             }
         }
         stage('Test') {
@@ -13,9 +23,9 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('Finalize') {
             steps {
-                echo 'Deploying....'
+                echo 'Finalizing....'
             }
         }
     }
