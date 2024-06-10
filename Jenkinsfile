@@ -7,6 +7,7 @@ pipeline {
                 sh 'echo Building..'
                 sh 'ls -ltra'
             }
+        }
         stage('Test') {
             steps {
                 echo 'Testing..'
