@@ -1,15 +1,14 @@
 pipeline {
-    agent none
-    stages {
-        agent {
-        // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-            dockerfile {
-                filename 'Dockerfile'
-                dir '.'
-                additionalBuildArgs  '--build-arg version=1.0.2'
-                args '-v /tmp:/tmp'
-            }
+    agent {
+    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+        dockerfile {
+            filename 'Dockerfile'
+            dir '.'
+            additionalBuildArgs  '--build-arg version=1.0.2'
+            args '-v /tmp:/tmp'
         }
+    }
+    stages {
         stage('Build') {
             agent  any
             steps {
