@@ -1,13 +1,13 @@
 pipeline {
-    agent {
-    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.'
-            additionalBuildArgs  '--build-arg version=1.0.2'
-            args '-v /tmp:/tmp'
-        }
+    node {
+      git '…' // checks out Dockerfile & Makefile
+      def myEnv = docker.build 'my-environment:snapshot'
+          myEnv.inside {
+            sh 'python pip list'
+            sh 'make test'
+          }
     }
+    
     stages {
         stage('Build') {
             agent  any
