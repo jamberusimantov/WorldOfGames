@@ -1,14 +1,5 @@
 pipeline {
-    agent {
-        node {
-          git '…' // checks out Dockerfile & Makefile
-          def myEnv = docker.build 'my-environment:snapshot'
-              myEnv.inside {
-                sh 'python pip list'
-                sh 'make test'
-              }
-        }
-    }
+    agent { docker 'maven:3-alpine' }
     
     stages {
         stage('Build') {
