@@ -9,6 +9,7 @@ pipeline {
                 sh 'git --version'
                 sh 'java --version'
                 sh 'docker --version'
+                sh 'docker ps'
             }
         }
     }
