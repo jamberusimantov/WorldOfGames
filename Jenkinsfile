@@ -7,6 +7,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'docker build -t sjamberu/world_of_games:1.0 .'
+                sh 'docker images'
                 sh 'docker ps'
             }
         }
