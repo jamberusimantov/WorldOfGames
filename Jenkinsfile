@@ -9,6 +9,8 @@ pipeline {
                 sh 'git --version'
                 sh 'java --version'
                 sh 'docker --version'
+                sh 'pwd'
+                sh 'ls -ltra'
                 sh 'docker ps'
             }
         }
