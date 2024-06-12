@@ -16,5 +16,12 @@ pipeline {
                 sh 'docker ps'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'echo Testing...'
+                sh 'docker exec -it wog sh'
+                sh 'python WorldOfGames/e2e.py'
+            }
+        }
     }
 }
