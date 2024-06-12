@@ -6,11 +6,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'git --version'
-                sh 'java --version'
-                sh 'docker --version'
-                sh 'pwd'
-                sh 'ls -ltra'
+                sh 'docker build -t sjamberu/world_of_games:1.0 .'
                 sh 'docker ps'
             }
         }
