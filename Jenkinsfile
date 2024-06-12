@@ -19,8 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo Testing...'
-                sh 'docker exec wog'
-                sh 'python WorldOfGames/e2e.py'
+                sh 'docker exec -it wog sh -c "python WorldOfGames/e2e.py"'
             }
         }
     }
