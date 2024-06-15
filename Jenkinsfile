@@ -2,6 +2,13 @@ pipeline {
     agent any
     
     stages {
+        stage('Checkout') {
+            steps {
+                sh 'echo Checkouting...'
+                git branch: 'main', url: 'https://github.com/jamberusimantov/WorldOfGames.git'
+                sh 'ls -ltra'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'echo Building...'
@@ -20,6 +27,13 @@ pipeline {
             steps {
                 sh 'echo Testing...'
                 sh 'docker exec -i wog sh -c "python WorldOfGames/e2e.py"'
+            }
+        }
+        stage('Finalize') {
+            steps {
+                sh 'echo Finalizing...'
+                sh 'docker stop wog'
+                sh 'docker rmi mywog:1.0'
             }
         }
     }
