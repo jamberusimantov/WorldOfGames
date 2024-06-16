@@ -6,6 +6,7 @@ pipeline {
             steps {
                 sh 'echo Checkouting...'
                 git branch: 'main', url: 'https://github.com/jamberusimantov/WorldOfGames.git'
+                sh 'pwd'
                 sh 'ls -ltra'
             }
         }
