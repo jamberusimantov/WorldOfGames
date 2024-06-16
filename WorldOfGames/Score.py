@@ -26,3 +26,15 @@ class Score:
         except BaseException as e:
             print(f"An error occurred: {e}")
             return BAD_RETURN_CODE
+
+
+    @staticmethod
+    def reset_score():
+        try:
+            with open(SCORES_FILE, "a+") as f:
+                pass
+            with open(SCORES_FILE, "w") as f:
+                f.write('0')
+        except BaseException as e:
+            print(f"An error occurred: {e}")
+            return BAD_RETURN_CODE

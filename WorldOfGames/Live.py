@@ -53,6 +53,7 @@ def load_game():
         keep_play = input("\nWould you like to keep playing? enter y to continue: ")
         if keep_play == "y":
             screen_cleaner()
-        else: 
+        else:
             print("\nGAME OVER !!!")
+            Score.reset_score()
             return

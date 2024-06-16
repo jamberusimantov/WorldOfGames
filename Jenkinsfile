@@ -1,19 +1,19 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
                 sh 'echo Building...'
                 sh 'docker build -t sjamberu/world_of_games:1.0 .'
-                sh 'docker images'
+                sh 'docker images|grep sjamberu/world_of_games:1.0'
             }
         }
         stage('Run') {
             steps {
                 sh 'echo Running...'
                 sh 'docker run --name world_of_games --detach --rm --publish 8777:8777 --env FLASK_APP=WorldOfGames --env FLASK_RUN_HOST=0.0.0.0 --env FLASK_RUN_PORT=8777 sjamberu/world_of_games:1.0'
-                sh 'docker ps'
+                sh 'docker ps| grep world_of_games'
             }
         }
         stage('Test') {
@@ -23,9 +23,12 @@ pipeline {
             }
         }
         stage('Finalize') {
+            environment {
+                DOCKER_TOKEN = 'dckr_pat_JfyhCwfu9XqUloG1bmtHNuqCcTc'
+            }
             steps {
                 sh 'echo Finalizing...'
-                sh 'docker login -u sjamberu -p dckr_pat_JfyhCwfu9XqUloG1bmtHNuqCcTc'
+                sh 'docker login -u sjamberu -p $DOCKER_TOKEN'
                 sh 'docker push sjamberu/world_of_games:1.0'
                 sh 'docker stop world_of_games'
                 sh 'docker rmi sjamberu/world_of_games:1.0'
