@@ -23,8 +23,9 @@ class CurrencyRouletteGame:
                 response = request("GET", url)
                 if response.status != 200:
                     raise(BaseException(response.reason))
+                add_amount = 5 - self.difficulty
                 ils_total = int(base_amount * response.json()['data'][target_currency])
-                return Interval(ils_total - (5 - self.difficulty), ils_total + (5 - self.difficulty))
+                return Interval(ils_total - add_amount, ils_total + add_amount)
         except BaseException as e:
             print(f"An error occurred: {e}")
             exit(BAD_RETURN_CODE)
