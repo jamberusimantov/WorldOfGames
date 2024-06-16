@@ -5,14 +5,3 @@ $ python WorldOfGames/MainGame.py
 
 #stop
 $ docker-compose down
-
-#push to docker hub
-$ docker login -u <USER> -p <PASSWORD>
-$ docker-compose push
-
-#ASSUMPTIONS
-1. freecurrencyapi.txt at root with apikey for app
-2. dockerhub user/password for push 
-
-#TEST
-python WorldOfGames/e2e.py

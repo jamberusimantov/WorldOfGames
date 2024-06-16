@@ -17,14 +17,15 @@ class CurrencyRouletteGame:
     def get_money_interval(self, base_amount):
         base_currency = 'USD'
         target_currency = 'ILS'
+        apikey = 'fca_live_Uy5FqISqz4ThsvVDSsyN62mgRKgL6ZsoUiaTS3u3'
         try:
-            with open("/run/secrets/APIKEY") as f:
-                url = f"http://api.freecurrencyapi.com/v1/latest?apikey={f.read()}&currencies={target_currency}&base_currency={base_currency}"
-                response = request("GET", url)
-                if response.status != 200:
-                    raise(BaseException(response.reason))
-                ils_total = int(base_amount * response.json()['data'][target_currency])
-                return Interval(ils_total - (5 - self.difficulty), ils_total + (5 - self.difficulty))
+            url = f"http://api.freecurrencyapi.com/v1/latest?apikey={apikey}&currencies={target_currency}&base_currency={base_currency}"
+            response = request("GET", url)
+            if response.status != 200:
+                raise(BaseException(response.reason))
+            add_amount = 5 - self.difficulty
+            ils_total = int(base_amount * response.json()['data'][target_currency])
+            return Interval(ils_total - add_amount, ils_total + add_amount)
         except BaseException as e:
             print(f"An error occurred: {e}")
             exit(BAD_RETURN_CODE)
