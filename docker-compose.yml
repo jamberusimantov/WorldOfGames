@@ -9,8 +9,3 @@ services:
       FLASK_RUN_HOST: 0.0.0.0
       FLASK_RUN_PORT: 8777
       FLASK_ENV: development
-    secrets:
-      - APIKEY
-secrets:
-  APIKEY:
-    file: freecurrencyapi.txt
