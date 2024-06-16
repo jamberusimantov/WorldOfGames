@@ -10,8 +10,6 @@ services:
       FLASK_RUN_PORT: 8777
     secrets:
       - APIKEY
-volumes:
-  jenkins:
 secrets:
   APIKEY:
     file: freecurrencyapi.txt
