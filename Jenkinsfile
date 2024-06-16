@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        stage('Preperation') {
+            steps {
+                sh 'echo Prepering...'
+                sh 'docker stop world_of_games'
+                sh 'docker rmi sjamberu/world_of_games:1.0'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'echo Building...'
@@ -30,8 +37,14 @@ pipeline {
                 sh 'echo Finalizing...'
                 sh 'docker login -u sjamberu -p $DOCKER_TOKEN'
                 sh 'docker push sjamberu/world_of_games:1.0'
+            }
+        }
+        stage('Clear') {
+            steps {
+                sh 'echo Clearing...'
                 sh 'docker stop world_of_games'
                 sh 'docker rmi sjamberu/world_of_games:1.0'
+                sh 'rm -R ../$JOB_NAME'
             }
         }
     }
