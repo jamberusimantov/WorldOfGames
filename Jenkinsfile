@@ -6,14 +6,14 @@ pipeline {
             steps {
                 sh 'echo Building...'
                 sh 'docker build -t sjamberu/world_of_games:1.0 .'
-                sh 'docker images --filter "name=world_of_games"'
+                sh 'docker images world_of_games'
             }
         }
         stage('Run') {
             steps {
                 sh 'echo Running...'
                 sh 'docker run --name world_of_games --detach --rm --publish 8777:8777 --env FLASK_APP=WorldOfGames --env FLASK_RUN_HOST=0.0.0.0 --env FLASK_RUN_PORT=8777 sjamberu/world_of_games:1.0'
-                sh 'docker ps --filter "name=world_of_games"'
+                sh 'docker ps -f "name=world_of_games"'
             }
         }
         stage('Test') {
