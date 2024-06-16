@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+    def docker_token = 'dckr_pat_JfyhCwfu9XqUloG1bmtHNuqCcTc'
     stages {
         stage('Build') {
             steps {
@@ -25,7 +25,7 @@ pipeline {
         stage('Finalize') {
             steps {
                 sh 'echo Finalizing...'
-                sh 'docker login -u sjamberu -p dckr_pat_JfyhCwfu9XqUloG1bmtHNuqCcTc'
+                sh 'docker login -u sjamberu -p $docker_token'
                 sh 'docker push sjamberu/world_of_games:1.0'
                 sh 'docker stop world_of_games'
                 sh 'docker rmi sjamberu/world_of_games:1.0'
