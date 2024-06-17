@@ -1,4 +1,4 @@
-from Utils import SCORES_FILE, BAD_RETURN_CODE
+from .Utils import SCORES_FILE, BAD_RETURN_CODE
 
 # package that is in charge of managing the scores file.
 # The scores file at this point will consist of only a number.
@@ -19,7 +19,7 @@ class Score:
             with open(SCORES_FILE, "a+") as f:
                 f.seek(0, 0)
                 score = f.readline()
-                if score.isdigit():
+                if score.isnumeric():
                     current_points = int(score)
             with open(SCORES_FILE, "w") as f:
                 f.write(str(points_of_winning + current_points))
@@ -31,7 +31,7 @@ class Score:
     @staticmethod
     def reset_score():
         try:
-            with open(SCORES_FILE, "a+") as f:
+            with open(SCORES_FILE, "a") as f:
                 pass
             with open(SCORES_FILE, "w") as f:
                 f.write('0')

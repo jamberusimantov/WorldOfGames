@@ -5,7 +5,7 @@ def verify_int_arr_in_range(arr, start, end):
     if len(arr) < 1:
         return False
     for i in range(len(arr)):
-        if not arr[i].isdigit() or not start <= int(arr[i]) <= end:
+        if not arr[i].isnumeric() or not start <= int(arr[i]) <= end:
             return False
     return True
 

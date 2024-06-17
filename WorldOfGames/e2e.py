@@ -13,7 +13,7 @@ def test_scores_service(url):
         if response.status != 200:
             raise(BaseException(response.reason))
         span = BeautifulSoup(response.data, "html.parser").find("span", class_="success")
-        return span and span.get_text().isdigit() and 0 <= int(span.get_text()) <= 1000
+        return span and span.get_text().isnumeric() and 0 <= int(span.get_text()) <= 1000
     except BaseException as e:
         print(f"\nAn error occurred: {e}")
         return False
@@ -23,8 +23,7 @@ def test_scores_service(url):
 # The main function will return -1 as an OS exit code if the tests failed and 0 if they passed.
 def main_function():
     print("\nTest Execution Started")
-    is_pass = test_scores_service('http://localhost:8777')
-    if is_pass:
+    if test_scores_service('http://localhost:8777'):
         print("\nSUCCESS\n\nTest Execution Finished")
         return 0
     print("\nFAILED\n\nTest Execution Finished")

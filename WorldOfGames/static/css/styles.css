@@ -17,9 +17,11 @@ header {
     left: 0;
     width: calc(100vw - 40px);
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
-header>h1 {
+header>div>h1 {
     margin: 0;
 }
 

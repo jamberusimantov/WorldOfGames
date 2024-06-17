@@ -14,8 +14,7 @@ class MainScore:
         try:
             with open(SCORES_FILE, "a+") as f:
                 f.seek(0, 0)
-                score = f.readline()
-                return render_template(SCORES_HTML, score = score)
+                return render_template(SCORES_HTML, score = f.readline() or '0', username = "")
         except BaseException as e:
             print(f"An error occurred: {e}")
-            return render_template(SCORES_HTML, error = e)
+            return render_template(SCORES_HTML, error = e, username = "")
