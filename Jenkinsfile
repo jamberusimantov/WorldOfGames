@@ -38,7 +38,6 @@ pipeline {
                 sh 'echo Clearing...'
                 sh 'docker stop world_of_games'
                 sh 'docker rmi sjamberu/world_of_games:1.0'
-                sh 'rm -R ../$JOB_NAME'
             }
         }
     }
