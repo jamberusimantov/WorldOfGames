@@ -1,8 +1,8 @@
-from .GuessGame import GuessGame
-from .MemoryGame import MemoryGame
-from .CurrencyRouletteGame import CurrencyRouletteGame
-from .Score import Score
-from .Utils import screen_cleaner, BAD_RETURN_CODE
+from GuessGame import GuessGame
+from MemoryGame import MemoryGame
+from CurrencyRouletteGame import CurrencyRouletteGame
+from Score import Score
+from Utils import screen_cleaner, BAD_RETURN_CODE
 from time import sleep
 from sys import exit
 

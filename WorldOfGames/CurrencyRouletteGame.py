@@ -1,7 +1,7 @@
 from random import random
 from urllib3 import request
 from sys import exit
-from .Utils import BAD_RETURN_CODE
+from Utils import BAD_RETURN_CODE
 
 # This game will use the free currency api to get the current exchange rate from USD to ILS,
 # generate a new random number between 1-100

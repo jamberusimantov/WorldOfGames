@@ -1,5 +1,5 @@
-from .Live import welcome, load_game
-from .Utils import screen_cleaner
+from Live import welcome, load_game
+from Utils import screen_cleaner
 
 screen_cleaner()
 username = input("Please enter a name: ")

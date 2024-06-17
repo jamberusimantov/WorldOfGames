@@ -9,3 +9,13 @@ services:
       FLASK_RUN_HOST: 0.0.0.0
       FLASK_RUN_PORT: 8777
       FLASK_ENV: development
+    develop:
+      watch:
+        - action: sync
+          path: /WorldOfGames
+          target: /app/WorldOfGames
+          ignore:
+            - WorldOfGames/static/
+            - WorldOfGames/templates/
+        - action: rebuild
+          path: WorldOfGames/

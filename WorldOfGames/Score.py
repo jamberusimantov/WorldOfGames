@@ -1,4 +1,4 @@
-from .Utils import SCORES_FILE, BAD_RETURN_CODE
+from Utils import SCORES_FILE, BAD_RETURN_CODE
 
 # package that is in charge of managing the scores file.
 # The scores file at this point will consist of only a number.
