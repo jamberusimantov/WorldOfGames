@@ -29,27 +29,27 @@ def load_game():
         
         while not chosen_game.isdigit() or not 1 <= int(chosen_game) <= 3:
             chosen_game = input("Please choose game from 1 to 3: ")
-        print("\n")
         while not chosen_difficulty.isdigit() or not 1 <= int(chosen_difficulty) <= 5:
             chosen_difficulty = input("Please choose game difficulty from 1 to 5: ")
         
         games = [MemoryGame, GuessGame, CurrencyRouletteGame]
+        win_catch_phrases = ['WELL DONE', 'AMAZING', 'AWESOME', 'WOW','GENIUS']
         is_won = games[int(chosen_game)-1](int(chosen_difficulty)).play()
 
         if is_won:
-            print(f"\nSUPER COMBO !!!")
+            print(f"\n{win_catch_phrases[int(chosen_difficulty) -1]}!!!")
             if Score.add_score(int(chosen_difficulty)) == BAD_RETURN_CODE:
                 print(f"An error occurred while accumulating score")
                 exit(BAD_RETURN_CODE)
         else:
-            print(f"\nTRY AGAIN !!!")
+            print(f"\nTRY AGAIN!!!")
 
         sleep(2)
-        if input("\nWould you like to keep playing? enter y to continue: ").lower() == "y":
-            screen_cleaner()
-        else:
+        if input("\nKeep playing? Y/N ").lower() == "n":
             print("\nGAME OVER !!!")
             if Score.reset_score() == BAD_RETURN_CODE:
                 print(f"An error occurred while resetting score")
                 exit(BAD_RETURN_CODE)
             return
+        else:
+            screen_cleaner()

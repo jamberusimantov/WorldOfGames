@@ -23,7 +23,7 @@ class MemoryGame:
     def generate_sequence(self):
         arr = []
         for i in range(self.difficulty):
-            arr.append(int((random() * 101) + 1))
+            arr.append(str(int((random() * 101) + 1)))
         return arr
 
 
@@ -31,8 +31,6 @@ class MemoryGame:
         guess = []
         while not verify_int_arr_in_range(guess, 1, 101) or len(guess) < self.difficulty:
             guess = input(f"Please insert sequence of {str(self.difficulty)} numbers from 1 to 101: ").split(sep=" ")
-        for i in range(self.difficulty):
-            guess[i] = int(guess[i])
         return guess
 
 
@@ -48,7 +46,6 @@ class MemoryGame:
     def play(self):
         print("\nMemory - Game")
         sequence = self.generate_sequence()
-        print(f"\n{sequence}", end="\r")
+        print(f"\n {sequence}", end="\r")
         sleep(0.7)
-        user_sequence = self.get_list_from_user()
-        return self.is_list_equal(user_sequence, sequence)
+        return self.is_list_equal(self.get_list_from_user(), sequence)

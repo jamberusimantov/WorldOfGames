@@ -1,5 +1,5 @@
 from random import random
-from urllib3 import request
+from urllib3 import PoolManager
 from sys import exit
 from Utils import BAD_RETURN_CODE
 
@@ -19,14 +19,14 @@ class CurrencyRouletteGame:
         apikey = 'fca_live_Uy5FqISqz4ThsvVDSsyN62mgRKgL6ZsoUiaTS3u3'
         try:
             url = f"http://api.freecurrencyapi.com/v1/latest?apikey={apikey}&currencies={target_currency}&base_currency={base_currency}"
-            response = request("GET", url)
+            response = PoolManager().request("GET", url)
             if response.status != 200:
                 raise(BaseException(response.reason))
-            ils_total = int(base_amount * response.json()['data'][target_currency])
             interval = []
             for i in range((5 - self.difficulty) * 2 + 1):
-                interval.append(ils_total - (5 - self.difficulty) + i)
+                interval.append(int(response.json()['data'][target_currency] * base_amount) + i - (5 - self.difficulty))
             return interval
+        
         except BaseException as e:
             print(f"An error occurred: {e}")
             exit(BAD_RETURN_CODE)
@@ -42,4 +42,4 @@ class CurrencyRouletteGame:
     def play(self):
         print("\nCurrency Roulette - Game")
         base_amount = int((random() * 100) + 1)
-        return  self.get_guess_from_user(base_amount) in self.get_money_interval(base_amount)
+        return self.get_guess_from_user(base_amount) in self.get_money_interval(base_amount)

@@ -1,12 +1,14 @@
 #start
-docker-compose up -d
-docker exec -it worldofgames-web-1 sh
-python WorldOfGames/MainGame.py
+$ docker-compose up -d
+$ docker exec -it worldofgames-web-1 sh
+$ python WorldOfGames/MainGame.py
 
 #stop
-docker-compose down
+$ docker-compose down
 
 #build
+------
 Repository URL: https://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@github.com/jamberusimantov/WorldOfGames.git
 Branch: */master
 Script Path: Jenkinsfile
+------
