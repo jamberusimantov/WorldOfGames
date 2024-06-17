@@ -5,7 +5,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'echo Building...'
-                sh 'docker rmi $(docker images sjamberu/world_of_games -q)'
                 sh 'docker build -t sjamberu/world_of_games:1.0 .'
                 sh 'docker images sjamberu/world_of_games'
             }
