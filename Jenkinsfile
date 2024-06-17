@@ -1,19 +1,23 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKER_CONTAINER = 'sjamberu/world_of_games'
+        DOCKER_IMAGE = 'sjamberu/world_of_games:1.0'
+    }
+    
     stages {
         stage('Build') {
             steps {
                 sh 'echo Building...'
-                sh 'docker build -t sjamberu/world_of_games:1.0 .'
-                sh 'docker images sjamberu/world_of_games'
+                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker images $DOCKER_IMAGE'
             }
         }
         stage('Run') {
             steps {
                 sh 'echo Running...'
-                sh 'docker run --name world_of_games --detach --rm --publish 8777:8777 --env FLASK_APP=WorldOfGames --env FLASK_RUN_HOST=0.0.0.0 --env FLASK_RUN_PORT=8777 sjamberu/world_of_games:1.0'
-                sh 'docker ps -f "name=world_of_games"'
+                sh 'docker run --name $DOCKER_CONTAINER --detach --rm --publish 8777:8777 --env FLASK_APP=WorldOfGames --env FLASK_RUN_HOST=0.0.0.0 --env FLASK_RUN_PORT=8777 $DOCKER_IMAGE'
+                sh 'docker ps -f "name=${DOCKER_CONTAINER}"'
             }
         }
         stage('Test') {
@@ -29,14 +33,14 @@ pipeline {
             steps {
                 sh 'echo Finalizing...'
                 sh 'docker login -u sjamberu -p $DOCKER_TOKEN'
-                sh 'docker push sjamberu/world_of_games:1.0'
+                sh 'docker push $DOCKER_IMAGE'
             }
         }
         stage('Clear') {
             steps {
                 sh 'echo Clearing...'
-                sh 'docker stop world_of_games'
-                sh 'docker rmi sjamberu/world_of_games:1.0'
+                sh 'docker stop $DOCKER_CONTAINER'
+                sh 'docker rmi  $DOCKER_IMAGE'
             }
         }
     }
