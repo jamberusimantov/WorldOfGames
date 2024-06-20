@@ -12,7 +12,7 @@ pipeline {
         stage('Run') {
             steps {
                 sh 'echo Running...'
-                sh 'docker stop $(docker ps -f "name=world_of_games" -q)'
+                sh 'docker stop $(docker ps -f "name=world_of_games" -q) || true'
                 sh 'docker run --name world_of_games --detach --rm --publish 8777:8777 --env FLASK_APP=WorldOfGames --env FLASK_RUN_HOST=0.0.0.0 --env FLASK_RUN_PORT=8777 sjamberu/world_of_games:1.0'
                 sh 'docker ps -f "name=world_of_games"'
             }
